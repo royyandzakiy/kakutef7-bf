@@ -1,7 +1,9 @@
+# Building AutoComplete Cache ... Done!
+# 
 # diff all
 
 # version
-# Betaflight / STM32F745 (S745) 4.2.9 Apr 27 2021 / 19:34:04 (e097f4ab7) MSP API: 1.43
+# Betaflight / STM32F745 (S745) 4.3.0 Jun 14 2022 / 00:49:48 (229ac66) MSP API: 1.44
 # config: manufacturer_id: HBRO, board_name: KAKUTEF7, version: cc8e118f, date: 2020-03-04T02:37:20Z
 
 # start the command batch
@@ -24,6 +26,12 @@ feature RX_SERIAL
 feature GPS
 feature TELEMETRY
 feature ESC_SENSOR
+
+# serial
+serial 2 2 115200 115200 0 115200
+serial 3 2048 115200 57600 0 115200
+serial 5 64 115200 57600 0 115200
+serial 6 1024 115200 57600 0 115200
 
 # beeper
 beeper -GYRO_CALIBRATED
@@ -49,12 +57,6 @@ beeper -RC_SMOOTHING_INIT_FAIL
 
 # beacon
 beacon RX_SET
-
-# serial
-serial 2 2 115200 115200 0 115200
-serial 3 2048 115200 57600 0 115200
-serial 5 64 115200 57600 0 115200
-serial 6 1024 115200 57600 0 115200
 
 # aux
 aux 0 0 0 1750 2100 0 0
@@ -88,15 +90,13 @@ vtx 2 7 0 0 3 1300 1500
 vtx 3 7 0 0 4 1500 2100
 
 # master
-set acc_trim_pitch = 4
-set acc_calibration = -141,6,-116,1
+set acc_calibration = -107,33,-109,1
 set align_mag = CW180FLIP
 set mag_align_pitch = 1800
 set mag_align_yaw = 1800
 set baro_hardware = AUTO
-set fpv_mix_degrees = 20
+set fpv_mix_degrees = 25
 set serialrx_provider = CRSF
-set blackbox_p_ratio = 128
 set dshot_idle_value = 400
 set dshot_bidir = ON
 set use_unsynced_pwm = OFF
@@ -140,8 +140,8 @@ set osd_current_pos = 386
 set osd_mah_drawn_pos = 192
 set osd_craft_name_pos = 6634
 set osd_gps_speed_pos = 385
-set osd_gps_lon_pos = 16
-set osd_gps_lat_pos = 1
+set osd_gps_lon_pos = 18452
+set osd_gps_lat_pos = 18433
 set osd_gps_sats_pos = 2081
 set osd_home_dir_pos = 2094
 set osd_home_dist_pos = 2145
@@ -166,13 +166,12 @@ set osd_stat_bb_no = OFF
 set osd_stat_max_esc_temp = ON
 set osd_stat_min_link_quality = ON
 set osd_stat_min_rssi_dbm = ON
-set osd_profile = 3
 set debug_mode = ESC_SENSOR_TMP
 set vtx_band = 5
-set vtx_channel = 6
-set vtx_power = 4
+set vtx_channel = 3
+set vtx_power = 1
 set vtx_low_power_disarm = UNTIL_FIRST_ARM
-set vtx_freq = 5843
+set vtx_freq = 5732
 set vcd_video_system = PAL
 set gyro_1_align_yaw = 2700
 set name = KolibriFPV
@@ -189,8 +188,10 @@ profile 0
 rateprofile 0
 
 # rateprofile 0
+set rates_type = BETAFLIGHT
 set roll_rc_rate = 102
 set pitch_rc_rate = 102
+set yaw_rc_rate = 100
 set roll_expo = 10
 set pitch_expo = 10
 set roll_srate = 80
@@ -200,15 +201,21 @@ set yaw_srate = 76
 rateprofile 1
 
 # rateprofile 1
-set roll_srate = 67
-set pitch_srate = 67
-set yaw_srate = 67
+set rates_type = BETAFLIGHT
+set roll_rc_rate = 100
+set pitch_rc_rate = 100
+set yaw_rc_rate = 100
 
 rateprofile 2
 
 # rateprofile 2
+set rates_type = BETAFLIGHT
+set roll_rc_rate = 100
+set pitch_rc_rate = 100
+set yaw_rc_rate = 100
 set roll_srate = 78
 set pitch_srate = 78
+set yaw_srate = 70
 
 rateprofile 3
 
@@ -217,7 +224,7 @@ rateprofile 4
 rateprofile 5
 
 # restore original rateprofile selection
-rateprofile 0
+rateprofile 2
 
 # save configuration
 save
